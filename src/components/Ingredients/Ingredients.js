@@ -60,7 +60,7 @@ const Ingredients = () => {
 		dispatch({ type: 'SET', ingredients: filteredIngredients });
 	}, []);
 
-	const addIngredientHandler = ingredient => {
+	const addIngredientHandler = useCallback(ingredient => {
 		dispatchHttp({ type: 'SEND' });
 		fetch('https://react-hooks-2acaa.firebaseio.com/ingredients.json', {
 			method: 'POST',
@@ -75,7 +75,7 @@ const Ingredients = () => {
 				// setUserIngredients(prevIngredients => [...prevIngredients, { id: responseData.name, ...ingredient }]);
 				dispatch({ type: 'ADD', ingredient: { id: responseData.name, ...ingredient } });
 			});
-	};
+	}, []);
 
 	const onRemoveItem = id => {
 		dispatchHttp({ type: 'SEND' });
